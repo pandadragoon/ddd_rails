@@ -4,7 +4,7 @@ module FormBuilder
   module Action
     module Form
       # Create form
-      class Create < Base
+      class CreateFormAction < Base
         def call(callbacks, attrs = nil)
           form = repository.new_entity(attrs)
           repository.save(form) ? callbacks[:success].call(form) : callbacks[:failure].call(form)

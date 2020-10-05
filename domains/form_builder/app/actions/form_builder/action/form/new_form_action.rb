@@ -4,7 +4,7 @@ module FormBuilder
   module Action
     module Form
       # Empty form object
-      class New < Base
+      class NewFormAction < Base
         def call
           repository.new_entity
         end
