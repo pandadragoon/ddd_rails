@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 module FormBuilder
-  class FormController
+  class FormsController < ApplicationController
     include FormBuilder::Service
+
+    def index
+      render json: FormGetterService.new.get_all_forms
+    end
 
     def new
       render json: FormCreatorService.new.new_form

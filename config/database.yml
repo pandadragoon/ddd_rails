@@ -1,25 +1,65 @@
-# SQLite. Versions 3.8.0 and up are supported.
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+
+local: &local
+  <<: *default
+  username: <%= ENV['POSTGRES_USER'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  primary:
+    <<: *local
+    database: archaeopteryx_development
+    migrations_paths: db/primary_migrate
+  primary_replica:
+    <<: *local
+    database: archaeopteryx_development
+    replica: true
+  form_builder: 
+    <<: *local
+    database: form_builder_development
+    migrations_paths: domains/form_builder/db/migrate
+  form_builder_replica:
+    <<: *local
+    database: form_builder_development
+    replica: true
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: db/test.sqlite3
+  primary:
+    <<: *local
+    database: archaeopteryx_test
+  primary_replica:
+    <<: *local
+    database: archaeopteryx_test
+    replica: true
+  form_builder: 
+    <<: *local
+    database: form_builder_test
+  form_builder_replica:
+    <<: *local
+    database: form_builder_test
+    replica: true
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  primary:
+    <<: *local
+    database: archaeopteryx_production
+    migrations_paths: db/primary_migrate
+  primary_replica:
+    <<: *local
+    database: archaeopteryx_production
+    replica: true
+  form_builder: 
+    <<: *local
+    database: form_builder_production
+    migrations_paths: domains/form_builder/db/migrate
+  form_builder_replica:
+    <<: *local
+    database: form_builder_production
+    replica: true
+

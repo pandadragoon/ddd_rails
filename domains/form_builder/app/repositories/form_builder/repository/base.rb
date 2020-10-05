@@ -4,7 +4,7 @@ module FormBuilder
   module Repository
     # Base class for repos
     class Base
-      attr_reader model
+      attr_reader :model
 
       def initialize(model)
         @model = model
