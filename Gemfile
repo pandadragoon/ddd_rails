@@ -41,8 +41,9 @@ end
 gem 'active_model_serializers', '~> 0.10.10'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.6', groups: [:development, :test]
 gem 'pg_search', '~> 2.3', '>= 2.3.3'
+gem 'sidekiq', '~> 6.1', '>= 6.1.2'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'wisper', '~> 2.0', '>= 2.0.1'
+gem 'wisper-sidekiq', '~> 1.3'
 
 # Engines
 
