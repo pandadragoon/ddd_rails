@@ -4,5 +4,6 @@ class AddColumnsToForm < ActiveRecord::Migration[6.0]
     add_column :form_builder_forms, :form_type_id, :integer
     add_column :form_builder_forms, :meta, :json
     add_column :form_builder_forms, :form_published_version_id, :integer
+    add_column :form_builder_forms,  :parent_id,   :integer
   end
 end
